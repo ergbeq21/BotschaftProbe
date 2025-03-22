@@ -33,7 +33,7 @@
 				Suchen
 			</button>
 		</form>
-        <form method="POST" action="?/searchById" class="flex items-center space-x-4">
+		<form method="POST" action="?/searchById" class="flex items-center space-x-4">
 			<input
 				type="number"
 				name="inputValue"

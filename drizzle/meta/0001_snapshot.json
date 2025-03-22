@@ -1,101 +1,95 @@
 {
-  "version": "5",
-  "dialect": "mysql",
-  "id": "7a8d693e-8c2b-459c-8826-6e5bbfa12ab8",
-  "prevId": "21e1af6f-dee9-4d63-8a4b-88a11be833c7",
-  "tables": {
-    "events": {
-      "name": "events",
-      "columns": {
-        "event_id": {
-          "name": "event_id",
-          "type": "serial",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": true
-        },
-        "event_name": {
-          "name": "event_name",
-          "type": "varchar(200)",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {
-        "events_event_id": {
-          "name": "events_event_id",
-          "columns": [
-            "event_id"
-          ]
-        }
-      },
-      "uniqueConstraints": {},
-      "checkConstraint": {}
-    },
-    "users": {
-      "name": "users",
-      "columns": {
-        "besucher_id": {
-          "name": "besucher_id",
-          "type": "serial",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": true
-        },
-        "vorname": {
-          "name": "vorname",
-          "type": "varchar(50)",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "nachname": {
-          "name": "nachname",
-          "type": "varchar(50)",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "email": {
-          "name": "email",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {
-        "users_besucher_id": {
-          "name": "users_besucher_id",
-          "columns": [
-            "besucher_id"
-          ]
-        }
-      },
-      "uniqueConstraints": {
-        "users_email_unique": {
-          "name": "users_email_unique",
-          "columns": [
-            "email"
-          ]
-        }
-      },
-      "checkConstraint": {}
-    }
-  },
-  "views": {},
-  "_meta": {
-    "schemas": {},
-    "tables": {},
-    "columns": {}
-  },
-  "internal": {
-    "tables": {},
-    "indexes": {}
-  }
+	"version": "5",
+	"dialect": "mysql",
+	"id": "7a8d693e-8c2b-459c-8826-6e5bbfa12ab8",
+	"prevId": "21e1af6f-dee9-4d63-8a4b-88a11be833c7",
+	"tables": {
+		"events": {
+			"name": "events",
+			"columns": {
+				"event_id": {
+					"name": "event_id",
+					"type": "serial",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": true
+				},
+				"event_name": {
+					"name": "event_name",
+					"type": "varchar(200)",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {
+				"events_event_id": {
+					"name": "events_event_id",
+					"columns": ["event_id"]
+				}
+			},
+			"uniqueConstraints": {},
+			"checkConstraint": {}
+		},
+		"users": {
+			"name": "users",
+			"columns": {
+				"besucher_id": {
+					"name": "besucher_id",
+					"type": "serial",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": true
+				},
+				"vorname": {
+					"name": "vorname",
+					"type": "varchar(50)",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"nachname": {
+					"name": "nachname",
+					"type": "varchar(50)",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"email": {
+					"name": "email",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {
+				"users_besucher_id": {
+					"name": "users_besucher_id",
+					"columns": ["besucher_id"]
+				}
+			},
+			"uniqueConstraints": {
+				"users_email_unique": {
+					"name": "users_email_unique",
+					"columns": ["email"]
+				}
+			},
+			"checkConstraint": {}
+		}
+	},
+	"views": {},
+	"_meta": {
+		"schemas": {},
+		"tables": {},
+		"columns": {}
+	},
+	"internal": {
+		"tables": {},
+		"indexes": {}
+	}
 }

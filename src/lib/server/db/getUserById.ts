@@ -20,8 +20,8 @@ export async function getUserByName(vorname: string) {
 	return result;
 }
 
-export async function getUserById(id: number){
-    const result = await db
+export async function getUserById(id: number) {
+	const result = await db
 		.select({
 			theId: user.besucher_id,
 			theName: user.vorname,
@@ -33,6 +33,4 @@ export async function getUserById(id: number){
 		.execute();
 
 	return result;
-
 }
-

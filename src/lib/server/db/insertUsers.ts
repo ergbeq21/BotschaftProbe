@@ -6,9 +6,8 @@ export async function insertUser(vorname: string, nachname: string, email: strin
 		await db.insert(user).values({
 			vorname,
 			nachname,
-			email,
+			email
 		});
-
 	} catch (error) {
 		console.error('Fehler beim Einfügen des Benutzers:', error);
 	}

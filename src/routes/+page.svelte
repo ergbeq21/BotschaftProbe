@@ -25,6 +25,7 @@
         {/if}
 
         <div class="mt-8">
+            <!-- svelte-ignore event_directive_deprecated -->
             <button 
                 on:click={goToAdminPage} 
                 class="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500">

@@ -9,8 +9,9 @@
 	<h1 class="mb-8 text-center text-4xl font-extrabold text-[#2a2b55]">
 		Übersicht von allen Besuchern
 	</h1>
-	<div class="mb-8 flex justify-center">
+	<div class="mb-8 flex justify-center flex-col">
 		<a class="text-center text-2xl font-extrabold text-[#1e21d4]" href="/events">Go to Events</a>
+		<a class="text-center text-l font-extrabold text-[#d4301e]" href="./">Go Back</a>
 	</div>
 
 	<div class="mb-8 flex justify-center space-x-6">

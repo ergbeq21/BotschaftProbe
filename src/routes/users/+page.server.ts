@@ -2,7 +2,14 @@ import { GetAllUsers } from '$lib/server/db/getUsers';
 import { deleteUser } from '$lib/server/db/deleteUser.js';
 import { getUserByName, getUserById } from '$lib/server/db/getUserById';
 
+<<<<<<< HEAD
 export async function load() {
+=======
+export async function load({locals}) {
+	if (!locals.user || locals.user.role !== 'admin') {
+		redirect(302, '/login');
+	}
+>>>>>>> origin/alternative-universe
 	const users = await GetAllUsers();
 	const serializedUsers = JSON.parse(JSON.stringify(users));
 

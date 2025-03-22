@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
 	"version": "7",
 	"dialect": "mysql",
 	"entries": [
@@ -25,3 +26,38 @@
 		}
 	]
 }
+=======
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1742581363443,
+      "tag": "0000_ambiguous_gressill",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1742674796592,
+      "tag": "0001_cloudy_champions",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1742675282819,
+      "tag": "0002_white_wolfpack",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1742681038301,
+      "tag": "0003_cheerful_timeslip",
+      "breakpoints": true
+    }
+  ]
+}
+>>>>>>> origin/alternative-universe

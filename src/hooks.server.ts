@@ -1,9 +1,11 @@
 import { db } from '$lib/server/db'; // Import your Drizzle database connection
 import { allUsers } from '$lib/server/db/schema'; // Import the schema
 import { eq } from 'drizzle-orm';
+import type { Handle } from '@sveltejs/kit';
 
 
-export const handle = async ({ event, resolve }) => {
+
+export const handle : Handle = async ({ event, resolve }) => {
 	// Get session token from cookies
 	const session = event.cookies.get('session');
 

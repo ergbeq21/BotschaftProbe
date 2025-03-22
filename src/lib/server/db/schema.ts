@@ -1,4 +1,4 @@
-import { mysqlTable, serial, int, varchar, timestamp } from 'drizzle-orm/mysql-core';
+import { mysqlTable, serial, int, varchar, timestamp, tinyint } from 'drizzle-orm/mysql-core';
 
 export const user = mysqlTable('users', {
 	besucher_id: serial('besucher_id').primaryKey(),
@@ -23,3 +23,13 @@ export const events = mysqlTable('events', {
 	event_id: serial('event_id').primaryKey(),
 	event_name: varchar('event_name', { length: 255 }).notNull()
 });
+
+
+export const visits = mysqlTable('visits', {
+	rsvp: tinyint('rsvp').notNull().default(0),
+	qr_code: varchar('qr_code', { length: 255 }).notNull(),
+	qr_expiration_date: timestamp('qr_expiration_date').notNull(),
+
+	besucher_id: serial('besucher_id').notNull().references(() => user.besucher_id),
+	event_id: serial('event_id').notNull().references(()=> events.event_id)
+  });

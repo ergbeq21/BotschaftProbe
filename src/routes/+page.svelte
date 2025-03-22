@@ -2,8 +2,7 @@
     import type { PageProps } from './$types';
     import { goto } from '$app/navigation';
 
-
-	let { data } : PageProps = $props(); 
+    let { data }: PageProps = $props();
 
     const goToAdminPage = () => {
         if (!data.user) {
@@ -14,19 +13,23 @@
     };
 </script>
 
-<div>
-    {#if data.user}
-        <p>Welcome back, {data.user.username}</p>
-    {:else}
-        <p>You are not logged in.</p>
-        <p>
-            <a href="/login">Login</a>
-        </p>
-    {/if}
-</div>
+<main class="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-500 to-teal-400 py-12">
+    <div class="bg-white p-8 rounded-xl shadow-xl max-w-lg w-full text-center">
+        {#if data.user}
+            <h1 class="text-3xl font-semibold text-gray-800 mb-4">Welcome back, {data.user.username}!</h1>
+            <p class="text-lg text-gray-600 mb-6">You are logged in as an admin.</p>
+        {:else}
+            <h1 class="text-3xl font-semibold text-gray-800 mb-4">You are not logged in.</h1>
+            <p class="text-lg text-gray-600 mb-4">To access the admin page, please log in.</p>
+            <a href="/login" class="text-blue-600 font-semibold hover:text-blue-700 transition duration-300">Login</a>
+        {/if}
 
-<main class="flex items-center justify-center p-10">
-    <button on:click={goToAdminPage} class="text-blue-600">
-        Go to Admin Page
-    </button>
+        <div class="mt-8">
+            <button 
+                on:click={goToAdminPage} 
+                class="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                Go to Admin Page
+            </button>
+        </div>
+    </div>
 </main>

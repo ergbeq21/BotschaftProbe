@@ -1,27 +1,27 @@
 {
-  "version": "7",
-  "dialect": "mysql",
-  "entries": [
-    {
-      "idx": 0,
-      "version": "5",
-      "when": 1742581363443,
-      "tag": "0000_ambiguous_gressill",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1742674796592,
-      "tag": "0001_cloudy_champions",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1742675282819,
-      "tag": "0002_white_wolfpack",
-      "breakpoints": true
-    }
-  ]
+	"version": "7",
+	"dialect": "mysql",
+	"entries": [
+		{
+			"idx": 0,
+			"version": "5",
+			"when": 1742581363443,
+			"tag": "0000_ambiguous_gressill",
+			"breakpoints": true
+		},
+		{
+			"idx": 1,
+			"version": "5",
+			"when": 1742674796592,
+			"tag": "0001_cloudy_champions",
+			"breakpoints": true
+		},
+		{
+			"idx": 2,
+			"version": "5",
+			"when": 1742675282819,
+			"tag": "0002_white_wolfpack",
+			"breakpoints": true
+		}
+	]
 }

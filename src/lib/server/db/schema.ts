@@ -14,7 +14,7 @@ export const allUsers = mysqlTable('allUsers', {
 	username: varchar('username', { length: 255 }).notNull(),
 	role: varchar('role', { length: 50 }).notNull(),
 	createdAt: timestamp('createdAt').defaultNow(),
-	session: varchar('session', { length: 255 }).notNull(), // Make sure { length: 255 } is always passed
+	session: varchar('session', { length: 255 }).notNull(),
 	sessionExpiration: varchar('sessionExpiration', { length: 255 }).notNull(),
 	password: varchar('password', { length: 255 }).notNull()
 });

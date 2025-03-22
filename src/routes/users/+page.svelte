@@ -9,6 +9,9 @@
 	<h1 class="mb-8 text-center text-4xl font-extrabold text-[#2a2b55]">
 		Übersicht von allen Besuchern
 	</h1>
+	<div class="mb-8 flex justify-center">
+		<a class="text-center text-2xl font-extrabold text-[#1e21d4]" href="/events">Go to Events</a>
+	</div>
 
 	<div class="mb-8 flex justify-center space-x-6">
 		<a
@@ -33,7 +36,7 @@
 				Suchen
 			</button>
 		</form>
-        <form method="POST" action="?/searchById" class="flex items-center space-x-4">
+		<form method="POST" action="?/searchById" class="flex items-center space-x-4">
 			<input
 				type="number"
 				name="inputValue"

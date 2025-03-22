@@ -3,9 +3,7 @@ import { allUsers } from '$lib/server/db/schema'; // Import the schema
 import { eq } from 'drizzle-orm';
 import type { Handle } from '@sveltejs/kit';
 
-
-
-export const handle : Handle = async ({ event, resolve }) => {
+export const handle: Handle = async ({ event, resolve }) => {
 	// Get session token from cookies
 	const session = event.cookies.get('session');
 
@@ -15,10 +13,7 @@ export const handle : Handle = async ({ event, resolve }) => {
 	}
 
 	// Find the user in Drizzle based on session token
-	const users = await db
-		.select()
-		.from(allUsers)
-		.where(eq(allUsers.session, session));
+	const users = await db.select().from(allUsers).where(eq(allUsers.session, session));
 
 	if (users.length === 0) {
 		// If no user is found, remove the session cookie

@@ -2,17 +2,13 @@ import { GetAllUsers } from '$lib/server/db/getUsers';
 import { deleteUser } from '$lib/server/db/deleteUser.js';
 import { getUserByName, getUserById } from '$lib/server/db/getUserById';
 
-
-
-
 export async function load() {
+	const users = await GetAllUsers();
+	const serializedUsers = JSON.parse(JSON.stringify(users));
 
-  const users = await GetAllUsers();
-  const serializedUsers = JSON.parse(JSON.stringify(users));
-
-  return {
-      users: serializedUsers
-  };
+	return {
+		users: serializedUsers
+	};
 }
 
 export const actions = {
@@ -41,24 +37,22 @@ export const actions = {
 		return { content: result };
 	},
 	searchById: async ({ request }) => {
-    const formData = await request.formData();
-    const input = formData.get('inputValue');
+		const formData = await request.formData();
+		const input = formData.get('inputValue');
 
-    if (!input) {
-        return { error: 'Invalid input' };
-    }
+		if (!input) {
+			return { error: 'Invalid input' };
+		}
 
-    const userId = Number(input);
-    if (isNaN(userId)) {
-       
-        return { error: 'Invalid number' };
-    }
+		const userId = Number(input);
+		if (isNaN(userId)) {
+			return { error: 'Invalid number' };
+		}
 
-    let result = await getUserById(userId);
-    return { content: result };
-}
+		let result = await getUserById(userId);
+		return { content: result };
+	}
 };
 function redirect(arg0: number, arg1: string) {
-  throw new Error('Function not implemented.');
+	throw new Error('Function not implemented.');
 }
-

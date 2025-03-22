@@ -18,7 +18,7 @@ export const handle : Handle = async ({ event, resolve }) => {
 	const users = await db
 		.select()
 		.from(allUsers)
-		.where(eq(allUsers.session_token, session));
+		.where(eq(allUsers.session, session));
 
 	if (users.length === 0) {
 		// If no user is found, remove the session cookie

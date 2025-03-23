@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
 	}
 });
 
-const sendTestEmail = async () => {
+const sendSpecificEmal = async () => {
 	const results = await db.select({ email: user.email }).from(user).execute();
 	const email = results.map((result) => result.email);
 
@@ -32,4 +32,4 @@ const sendTestEmail = async () => {
 	}
 };
 
-export { sendTestEmail };
+export { sendSpecificEmal };

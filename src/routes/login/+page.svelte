@@ -1,6 +1,6 @@
 <script>
 	import { enhance } from '$app/forms';
-	export let form;
+
 </script>
 
 <div class="flex min-h-screen items-center justify-center bg-gradient-to-r from-blue-500 to-teal-400 px-4">

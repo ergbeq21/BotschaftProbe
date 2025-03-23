@@ -17,7 +17,7 @@
     <div class="bg-white p-8 rounded-xl shadow-xl max-w-lg w-full text-center">
         {#if data.user}
             <h1 class="text-3xl font-semibold text-gray-800 mb-4">Welcome back, {data.user.username}!</h1>
-            <p class="text-lg text-gray-600 mb-6">You are logged in as an admin.</p>
+            <p class="text-lg text-gray-600 mb-6">You are logged in as {data.user.role}.</p>
         {:else}
             <h1 class="text-3xl font-semibold text-gray-800 mb-4">You are not logged in.</h1>
             <p class="text-lg text-gray-600 mb-4">To access the admin page, please log in.</p>
@@ -31,6 +31,7 @@
                 class="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 Go to Admin Page
             </button>
+            
         </div>
     </div>
 </main>

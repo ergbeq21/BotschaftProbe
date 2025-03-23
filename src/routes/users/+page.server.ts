@@ -1,10 +1,12 @@
 import { GetAllUsers } from '$lib/server/db/getUsers';
 import { deleteUser } from '$lib/server/db/deleteUser.js';
 import { getUserByName, getUserById } from '$lib/server/db/getUserById';
+import { error } from '@sveltejs/kit';
+
 
 export async function load({locals}) {
 	if (!locals.user || locals.user.role !== 'admin') {
-		redirect(302, '/login');
+		throw error(403, 'Access Denied, only admins have access to this site');
 	}
 	const users = await GetAllUsers();
 	const serializedUsers = JSON.parse(JSON.stringify(users));

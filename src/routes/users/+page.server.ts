@@ -19,18 +19,18 @@ export async function load({ locals }) {
 
 export const actions = {
 	filerByRsvp: async ({ request }) => {
-        const formData = await request.formData();
-        const rsvpValue = formData.get('rsvp'); 
+		const formData = await request.formData();
+		const rsvpValue = formData.get('rsvp');
 
-        const userRsvp = rsvpValue !== null ? Number(rsvpValue) : null;
+		const userRsvp = rsvpValue !== null ? Number(rsvpValue) : null;
 
-        if (userRsvp === null) {
-            return { success: false, message: 'Invalid RSVP value' };
-        }
+		if (userRsvp === null) {
+			return { success: false, message: 'Invalid RSVP value' };
+		}
 
-        let result = await getBesucherByRsvp(userRsvp); 
-        return { content: result };
-    },
+		let result = await getBesucherByRsvp(userRsvp);
+		return { content: result };
+	},
 	deleteUser: async ({ request }) => {
 		const formData = await request.formData();
 		const userId = Number(formData.get('besucher_id'));

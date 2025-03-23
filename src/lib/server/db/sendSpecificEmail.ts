@@ -1,4 +1,6 @@
 import nodemailer from 'nodemailer';
+import { db } from '.';
+import { user } from './schema';
 
 const transporter = nodemailer.createTransport({
 	service: 'gmail',
@@ -8,7 +10,10 @@ const transporter = nodemailer.createTransport({
 	}
 });
 
-const sendTestEmail = async (email: string) => {
+const sendTestEmail = async () => {
+	const results = await db.select({ email: user.email }).from(user).execute();
+	const email = results.map((result) => result.email);
+
 	const mailOptions = {
 		from: 'Ambasada Austriake ergitbeqiri07@gmail.com',
 		to: email,

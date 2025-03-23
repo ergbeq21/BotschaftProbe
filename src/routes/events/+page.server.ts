@@ -2,7 +2,7 @@ import { GetAllEvents } from '$lib/server/getAllEvents';
 import { deleteEvent } from '$lib/server/db/deleteEvent.js';
 import { redirect } from '@sveltejs/kit';
 
-export async function load({locals}) {
+export async function load({ locals }) {
 	if (!locals.user || locals.user.role !== 'admin') {
 		redirect(302, '/login');
 	}

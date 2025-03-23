@@ -2,9 +2,10 @@ import { GetAllUsers } from '$lib/server/db/getUsers';
 import { deleteUser } from '$lib/server/db/deleteUser.js';
 import { getUserByName, getUserById } from '$lib/server/db/getUserById';
 import { error } from '@sveltejs/kit';
+import { getBesucherByRsvp } from '$lib/server/db/filerFunktionen.js';
+import { request } from 'http';
 
-
-export async function load({locals}) {
+export async function load({ locals }) {
 	if (!locals.user || locals.user.role !== 'admin') {
 		throw error(403, 'Access Denied, only admins have access to this site');
 	}
@@ -17,6 +18,19 @@ export async function load({locals}) {
 }
 
 export const actions = {
+	filerByRsvp: async ({ request }) => {
+        const formData = await request.formData();
+        const rsvpValue = formData.get('rsvp'); 
+
+        const userRsvp = rsvpValue !== null ? Number(rsvpValue) : null;
+
+        if (userRsvp === null) {
+            return { success: false, message: 'Invalid RSVP value' };
+        }
+
+        let result = await getBesucherByRsvp(userRsvp); 
+        return { content: result };
+    },
 	deleteUser: async ({ request }) => {
 		const formData = await request.formData();
 		const userId = Number(formData.get('besucher_id'));

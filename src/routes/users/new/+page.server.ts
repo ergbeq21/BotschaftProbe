@@ -1,15 +1,12 @@
 import { insertUser } from '$lib/server/db/insertUsers';
 import { redirect } from '@sveltejs/kit';
 
-
-export async function load({locals}) {
+export async function load({ locals }) {
 	if (!locals.user || locals.user.role !== 'admin') {
 		redirect(302, '/login');
 	}
 
-	return {
-		
-	};
+	return {};
 }
 
 export const actions = {

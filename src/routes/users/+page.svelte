@@ -3,6 +3,7 @@
 	export let data;
 	export let form;
 	console.log(data?.users);
+
 </script>
 
 <main class="min-h-screen bg-gray-50 p-10">
@@ -34,7 +35,7 @@
 				type="submit"
 				class="rounded-lg bg-blue-600 px-4 py-2 text-lg font-semibold text-white transition duration-300 hover:bg-blue-700"
 			>
-				Suchen
+				Suche Name
 			</button>
 		</form>
 		<form method="POST" action="?/searchById" class="flex items-center space-x-4">
@@ -49,9 +50,28 @@
 				type="submit"
 				class="rounded-lg bg-blue-600 px-4 py-2 text-lg font-semibold text-white transition duration-300 hover:bg-blue-700"
 			>
-				Suchen
+				Suche Id
 			</button>
 		</form>
+		<form method="POST" action="?/filerByRsvp" class="flex items-center space-x-4">
+			<select
+			  name="rsvp"
+			  required
+			  class="w-75 rounded-lg border border-gray-300 px-4 py-2 text-lg shadow-sm"
+			>
+			  <option value="">Wähle</option>
+			  <option value="1">Akzeptierte Einladung</option>
+			  <option value="0">Nicht Akzeptierte Einladung</option>
+
+			</select>
+			<button
+			  type="submit"
+			  class="rounded-lg bg-blue-600 px-4 py-2 text-lg font-semibold text-white transition duration-300 hover:bg-blue-700"
+			>
+			  Suche RSVP
+			</button>
+		  </form>
+		
 	</div>
 
 	<div class="mb-6 text-center">
@@ -59,18 +79,14 @@
 			<p class="text-lg text-[#2a2b55]">{form.content[0]?.theName} {form.content[0]?.theVorname}</p>
 			<p class="text-lg text-[#2a2b55]">{form.content[0]?.theEmail}</p>
 		{/if}
-	</div>
-
-	<div class="mb-6 flex justify-center">
-		<select
-			name="filter"
-			id="filter"
-			class="rounded-lg border border-gray-300 px-4 py-2 text-lg shadow-sm"
-		>
-			<option value="all">Alle</option>
-			<option value="RSVS True">Akzeptierte Einladung</option>
-			<option value="RSVS False">Nicht Akzeptierte Einladung</option>
-		</select>
+		{#if form?.content && form.content.length > 0}
+        {#each form.content as user}
+        <div>
+            <p>{user.vorname} {user.nachname}</p>
+            <p>{user.email}</p>
+        </div>
+        {/each}
+		{/if}
 	</div>
 
 	<div class="mx-auto max-w-4xl rounded-lg bg-white p-8 shadow-lg">

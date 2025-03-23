@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { writable, derived } from 'svelte/store';
+    import { writable, derived  } from 'svelte/store';
+    import { onMount } from 'svelte';
     import '../app.css';
     let { children } = $props();
 
@@ -28,14 +29,24 @@
         activeLink.set(link);
     };
 
-    // Use $effect to set the active link based on the current URL
-    $effect(() => {
+    // Function to update the active link based on the current URL
+    const updateActiveLink = () => {
         const path = window.location.pathname;
         if (path === '/') setActiveLink('home');
         else if (path === '/users') setActiveLink('users');
         else if (path === '/events') setActiveLink('events');
         else if (path === '/sendToAll') setActiveLink('sendToAll');
         else if (path === '/sendEmail') setActiveLink('sendEmail');
+    };
+
+    // Use onMount to set the initial active link
+    onMount(() => {
+        updateActiveLink();
+        // Add an event listener for URL changes
+        window.addEventListener('popstate', updateActiveLink);
+        return () => {
+            window.removeEventListener('popstate', updateActiveLink);
+        };
     });
 </script>
 
@@ -64,27 +75,27 @@
         </h2>
         <ul class="space-y-3 font-medium flex-grow">
             <li class:flex={!$sidebarExpanded} class:justify-center={!$sidebarExpanded}>
-                <a href="/" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition" class:active={$activeLink === 'home'}>
+                <a href="/" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition" class:active={$activeLink === 'home'} onclick={updateActiveLink}>
                     🏠 {#if $isTextVisible}Home{/if}
                 </a>
             </li>
             <li class:flex={!$sidebarExpanded} class:justify-center={!$sidebarExpanded}>
-                <a href="/users" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition" class:active={$activeLink === 'users'}>
+                <a href="/users" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition" class:active={$activeLink === 'users'} onclick={updateActiveLink}>
                     👥 {#if $isTextVisible}Users{/if}
                 </a>
             </li>
             <li class:flex={!$sidebarExpanded} class:justify-center={!$sidebarExpanded}>
-                <a href="/events" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition" class:active={$activeLink === 'events'}>
+                <a href="/events" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition" class:active={$activeLink === 'events'} onclick={updateActiveLink}>
                     📅 {#if $isTextVisible}Events{/if}
                 </a>
             </li>
             <li class:flex={!$sidebarExpanded} class:justify-center={!$sidebarExpanded}>
-                <a href="/sendToAll" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition" class:active={$activeLink === 'sendToAll'}>
+                <a href="/sendToAll" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition" class:active={$activeLink === 'sendToAll'} onclick={updateActiveLink}>
                     📧 {#if $isTextVisible}Email to All{/if}
                 </a>
             </li>
             <li class:flex={!$sidebarExpanded} class:justify-center={!$sidebarExpanded}>
-                <a href="/sendEmail" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition" class:active={$activeLink === 'sendEmail'}>
+                <a href="/sendEmail" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition" class:active={$activeLink === 'sendEmail'} onclick={updateActiveLink}>
                     ✉️ {#if $isTextVisible}Specific Email{/if}
                 </a>
             </li>

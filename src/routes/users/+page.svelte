@@ -6,6 +6,8 @@
 
 </script>
 
+<a href="/sendEmail">Go to Email sender page</a>
+
 <main class="min-h-screen bg-gray-50 p-10">
 	<h1 class="mb-8 text-center text-4xl font-extrabold text-[#2a2b55]">
 		Übersicht von allen Besuchern

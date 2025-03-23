@@ -9,13 +9,13 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendTestEmail = async (email: string) => {
-	const mailOptions = {
-		from: 'Ambasada Austriake ergitbeqiri07@gmail.com',
-		to: email,
-		subject: 'Ftese per ne diten e pavarsise',
-		text: `Hello, do you want to join our party!`,
-		html: `<p>Go to our website: https://botschaft.vercel.app/</p>`
-	};
+  const mailOptions = {
+    from: 'Ambasada Austriake ergitbeqiri07@gmail.com',
+    to: email,
+    subject: 'Ftese per ne diten e pavarsise',
+    text: `Hello, do you want to join our party!`,
+    html: `<p>Go to our website: https://botschaft.vercel.app/</p>`,
+  };
 
 	try {
 		const info = await transporter.sendMail(mailOptions);

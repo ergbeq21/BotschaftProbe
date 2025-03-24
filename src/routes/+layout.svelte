@@ -1,63 +1,64 @@
 <script lang="ts">
+	import { writable, derived } from 'svelte/store';
+	import { onMount } from 'svelte';
+	import '../app.css';
+	let { children } = $props();
 
-    import { writable, derived  } from 'svelte/store';
-    import { onMount } from 'svelte';
-    import '../app.css';
-    let { children } = $props();
+	// Create a store for menuOpen
+	let menuOpen = writable(false);
+	let textVisible = writable(true);
+	let isSidebarExpanded = writable(true);
+	let activeLink = writable('');
 
-    // Create a store for menuOpen
-    let menuOpen = writable(false);
-    let textVisible = writable(true);
-    let isSidebarExpanded = writable(true);
-    let activeLink = writable('');
+	// Derived store to update a local variable
+	let isMenuOpen = derived(menuOpen, ($menuOpen) => $menuOpen);
+	let isTextVisible = derived(textVisible, ($textVisible) => $textVisible);
+	let sidebarExpanded = derived(isSidebarExpanded, ($isSidebarExpanded) => $isSidebarExpanded);
 
-    // Derived store to update a local variable
-    let isMenuOpen = derived(menuOpen, $menuOpen => $menuOpen);
-    let isTextVisible = derived(textVisible, $textVisible => $textVisible);
-    let sidebarExpanded = derived(isSidebarExpanded, $isSidebarExpanded => $isSidebarExpanded);
+	const toggleMenu = () => {
+		// Update the store value instead of directly toggling a boolean
+		menuOpen.update((value) => !value);
+	};
 
-    const toggleMenu = () => {
-        // Update the store value instead of directly toggling a boolean
-        menuOpen.update(value => !value);
-    };
+	const toggleTextVisibility = () => {
+		textVisible.update((value) => !value);
+		isSidebarExpanded.update((value) => !value);
+	};
 
-    const toggleTextVisibility = () => {
-        textVisible.update(value => !value);
-        isSidebarExpanded.update(value => !value);
-    };
+	const setActiveLink = (link: string) => {
+		activeLink.set(link);
+	};
 
-    const setActiveLink = (link: string) => {
-        activeLink.set(link);
-    };
-
-
-    const updateActiveLink = () => {
-
-        const path = window.location.pathname;
-        if (path === '/') setActiveLink('home');
-        else if (path === '/users') setActiveLink('users');
-        else if (path === '/events') setActiveLink('events');
-        else if (path === '/sendToAll') setActiveLink('sendToAll');
-        else if (path === '/sendEmail') setActiveLink('sendEmail');
-    }
+	const updateActiveLink = () => {
+		const path = window.location.pathname;
+		if (path === '/') setActiveLink('home');
+		else if (path === '/users') setActiveLink('users');
+		else if (path === '/events') setActiveLink('events');
+		else if (path === '/sendToAll') setActiveLink('sendToAll');
+		else if (path === '/sendEmail') setActiveLink('sendEmail');
+	};
 </script>
 
 <button
-    class="fixed top-4 left-4 z-50 p-3 rounded-full bg-gray-800 text-white shadow-lg sm:hidden transition-transform duration-300 hover:bg-gray-700"
-    aria-label="Toggle menu"
-    onclick={toggleMenu}
+	class="fixed top-4 left-4 z-50 rounded-full bg-gray-800 p-3 text-white shadow-lg transition-transform duration-300 hover:bg-gray-700 sm:hidden"
+	aria-label="Toggle menu"
+	onclick={toggleMenu}
 >
-    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-        <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
-    </svg>
+	<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+		<path
+			clip-rule="evenodd"
+			fill-rule="evenodd"
+			d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
+		></path>
+	</svg>
 </button>
 
 <aside
-    id="default-sidebar"
-    class="fixed top-0 left-0 z-40 h-screen bg-gray-900 text-white shadow-xl transform transition-transform duration-300 flex flex-col"
-    class:translate-x-0={$isMenuOpen}
-    class:w-72={$sidebarExpanded}
-    class:w-16={!$sidebarExpanded}
+	id="default-sidebar"
+	class="fixed top-0 left-0 z-40 flex h-screen transform flex-col bg-gray-900 text-white shadow-xl transition-transform duration-300"
+	class:translate-x-0={$isMenuOpen}
+	class:w-72={$sidebarExpanded}
+	class:w-16={!$sidebarExpanded}
 >
     <div class="h-full flex flex-col p-5">
         <h2 class="text-2xl font-bold mb-6 text-center flex justify-center">
@@ -118,16 +119,19 @@
     </div>
 </aside>
 
-<div class="p-4 transition-all duration-300" class:ml-72={$sidebarExpanded} class:ml-16={!$sidebarExpanded}>
-    <main class="p-6 bg-white shadow-md rounded-lg">
-        {@render children()}
-    </main>
+<div
+	class="p-4 transition-all duration-300"
+	class:ml-72={$sidebarExpanded}
+	class:ml-16={!$sidebarExpanded}
+>
+	<main class="rounded-lg bg-white p-6 shadow-md">
+		{@render children()}
+	</main>
 </div>
 
 <style>
-    /* Add this style to highlight the active link */
-    a.active {
-        background-color: #4a5568; /* Adjust the color as needed */
-    }
+	/* Add this style to highlight the active link */
+	a.active {
+		background-color: #4a5568; /* Adjust the color as needed */
+	}
 </style>
-

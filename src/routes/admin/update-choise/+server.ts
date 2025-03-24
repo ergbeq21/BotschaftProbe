@@ -14,7 +14,7 @@ export async function GET({ url }) {
         return json({ error: 'Missing parameters' }, { status: 400 });
     }
 
-    const rsvpValue = choice === 'yes' ? 1 : 0;
+	const rsvpValue = choice === 'yes' ? 1 : 0;
 
     try {
         const result = await db.update(visits)

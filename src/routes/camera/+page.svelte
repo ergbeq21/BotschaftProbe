@@ -7,7 +7,7 @@
     let html5Qrcode: Html5Qrcode | null = null;
     let result: string = "";
     let userMessage: string = "";
-
+ 
     onMount(init);
  
     function init(): void {
@@ -41,10 +41,10 @@
     const onScanSuccess: QrcodeSuccessCallback = async (decodedText, decodedResult) => {
         console.log(decodedResult);
         result = decodedText;
-        
+       
         // Call the API to check if the user exists
         await checkUserInDatabase(result);
-        
+       
         stop();
     };
  
@@ -61,7 +61,7 @@
                 },
                 body: JSON.stringify({ name })
             });
-
+ 
             const data = await response.json();
             if (data.success) {
                 userMessage = `User found: ${data.user.vorname}`;
@@ -76,10 +76,11 @@
 </script>
  
 <div id="reader"></div>
-
+ 
 <button on:click={start} disabled={scanning}>Start Scanning</button>
 <button on:click={stop} disabled={!scanning}>Stop Scanning</button>
-
+ 
 <p>Scan Result: {result}</p>
-
+ 
 <p>{userMessage}</p>
+ 

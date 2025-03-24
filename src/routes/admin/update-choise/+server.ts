@@ -24,6 +24,8 @@ export async function GET({ url }) {
         // Verify if besucher_id exists in the users table
         const userExists = await db.select().from(user).where(eq(user.besucher_id, besucherId)).limit(1);
 
+        console.log('User exists check result:', userExists); // Log the result of the query
+
         if (userExists.length === 0) {
             console.log(`User with besucher_id ${besucherId} not found.`);
             return json({ error: 'User not found' }, { status: 404 });

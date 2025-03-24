@@ -26,12 +26,12 @@
 	class="flex min-h-screen flex-col items-center justify-center bg-gradient-to-r from-blue-500 to-teal-500 p-6"
 >
 	<div class="w-full max-w-md rounded-lg bg-white p-8 text-center shadow-xl">
-		<!-- Go back to users link -->
+
 		<a href="/users" class="mb-4 inline-block text-sm text-blue-600 hover:underline">
 			Go back to users
 		</a>
 
-		<!-- Button to send emails -->
+
 		<button
 			on:click={sendEmails}
 			disabled={loading}
@@ -44,7 +44,7 @@
 			{/if}
 		</button>
 
-		<!-- Message display -->
+
 		{#if message}
 			<p class="mt-6 text-lg font-semibold text-gray-800">
 				{message}

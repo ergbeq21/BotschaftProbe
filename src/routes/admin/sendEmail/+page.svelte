@@ -1,6 +1,6 @@
 <script lang="ts">
 	let email: string = '';
-	let userId: string = ''; // New userId input
+	let userId: string = '';
 	let successMessage: string = '';
 	let errorMessage: string = '';
 	let isLoading: boolean = false;
@@ -11,13 +11,12 @@
 		errorMessage = '';
 
 		try {
-			// Send both email and userId as JSON payload
 			const response = await fetch('/admin/sendEmail', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify({ email, userId }) // Sending both email and userId
+				body: JSON.stringify({ email, userId }) 
 			});
 
 			const data = await response.json();

@@ -13,7 +13,7 @@
 
 	<div class="mb-12 flex flex-wrap justify-center gap-6">
 		<a
-			href="/users/new"
+			href="/admin/users/new"
 			class="bg-blue-600 text-white rounded-lg py-3 px-8 text-lg font-semibold shadow-md transition duration-300 transform hover:scale-105 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
 		>
 			Füge einen Besucher hinzu

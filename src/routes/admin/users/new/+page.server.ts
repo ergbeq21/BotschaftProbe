@@ -26,7 +26,7 @@ export const actions = {
 		}
 
 		await insertUser(userName, userNachname, userEmail);
-		redirect(303, '/users');
+		redirect(303, '/admin/users');
 
 		return { success: true, message: 'User inserted successfully.' };
 	}

@@ -5,16 +5,22 @@ import { eq } from 'drizzle-orm';
 
 export async function GET({ url }) {
     console.log('Received request at /admin/update-choice');
+    
+    // Log the full URL to see if parameters are correct
+    console.log('Full URL:', url.toString());
 
     const besucherIdString = url.searchParams.get('besucher_id');
     const choice = url.searchParams.get('choice');
 
+    // Log the received parameters
     console.log('Received parameters:', { besucherIdString, choice });
 
-    // Check if besucher_id is valid
+    // Validate if besucher_id and choice exist
     const besucherId = Number(besucherIdString);
 
+    // Check if besucherId is valid
     if (isNaN(besucherId) || !choice) {
+        console.error('Invalid or missing parameters');
         return json({ error: 'Invalid or missing parameters' }, { status: 400 });
     }
 
@@ -23,7 +29,6 @@ export async function GET({ url }) {
     try {
         // Verify if besucher_id exists in the users table
         const userExists = await db.select().from(user).where(eq(user.besucher_id, besucherId)).limit(1);
-
         console.log('User exists check result:', userExists); // Log the result of the query
 
         if (userExists.length === 0) {

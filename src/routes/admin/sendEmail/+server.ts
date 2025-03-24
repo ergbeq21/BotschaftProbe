@@ -2,6 +2,9 @@ import { json } from '@sveltejs/kit';
 import { sendTestEmail } from '$lib/server/mailer';
 import { GetAllUsers } from '$lib/server/db/getUsers.js';
 
+
+
+
 export async function POST({ request }) {
 	const { email } = await request.json();
 

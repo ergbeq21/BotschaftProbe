@@ -23,7 +23,7 @@ export const actions: Actions = {
 				httpOnly: true,
 				sameSite: 'strict'
 			});
-			throw redirect(302, '/'); // Use `throw` because `redirect` throws an error in SvelteKit
+			throw redirect(302, '/'); 
 		} else {
 			return {
 				success: false,

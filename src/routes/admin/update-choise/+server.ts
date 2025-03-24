@@ -6,21 +6,24 @@ import { eq } from 'drizzle-orm';
 export async function GET({ url }) {
     console.log('Received request at /admin/update-choice');
 
-    const besucherId = url.searchParams.get('besucher_id');
+    const besucherIdString = url.searchParams.get('besucher_id');
     const choice = url.searchParams.get('choice');
 
-    console.log('Received parameters:', { besucherId, choice });
+    console.log('Received parameters:', { besucherIdString, choice });
 
-    if (!besucherId || !choice) {
-        return json({ error: 'Missing parameters' }, { status: 400 });
+    // Check if besucher_id is valid
+    const besucherId = Number(besucherIdString);
+
+    if (isNaN(besucherId) || !choice) {
+        return json({ error: 'Invalid or missing parameters' }, { status: 400 });
     }
 
     const rsvpValue = choice === 'yes' ? 1 : 0;
 
     try {
         // Verify if besucher_id exists in the users table
-        const userExists = await db.select().from(user).where(eq(user.besucher_id, Number(besucherId))).limit(1);
-        
+        const userExists = await db.select().from(user).where(eq(user.besucher_id, besucherId)).limit(1);
+
         if (userExists.length === 0) {
             console.log(`User with besucher_id ${besucherId} not found.`);
             return json({ error: 'User not found' }, { status: 404 });
@@ -30,7 +33,7 @@ export async function GET({ url }) {
         console.log('Attempting to update the database...');
         const result = await db.update(visits)
             .set({ rsvp: rsvpValue })
-            .where(eq(visits.besucher_id, Number(besucherId)))  // Ensure correct column name and type
+            .where(eq(visits.besucher_id, besucherId))  // Ensure correct column name and type
             .execute();
 
         // Log the result object to inspect its structure

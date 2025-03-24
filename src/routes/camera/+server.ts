@@ -1,8 +1,8 @@
 import { json } from "@sveltejs/kit";
-import { db } from "$lib/server/db";
+import { db } from "$lib/server/db/index";
 import { user } from "$lib/server/db/schema";
-import { eq, and } from "drizzle-orm";
-import type { RequestEvent } from "@sveltejs/kit"; 
+import { eq } from "drizzle-orm";
+import type { RequestEvent } from "@sveltejs/kit";
 
 export async function POST({ request }: RequestEvent) {
     const { name } = await request.json();
@@ -11,16 +11,17 @@ export async function POST({ request }: RequestEvent) {
         return json({ success: false, message: "No name provided" }, { status: 400 });
     }
 
-    const [vorname, nachname] = name.split(" ");
+    // Only use the first part of the name (first name)
+    const vorname = name.split(" ")[0];
 
-    if (!vorname || !nachname) {
+    if (!vorname) {
         return json({ success: false, message: "Invalid name format" }, { status: 400 });
     }
 
     const result = await db
         .select()
         .from(user)
-        .where(and(eq(user.vorname, vorname), eq(user.nachname, nachname)));
+        .where(eq(user.vorname, vorname)); // Only check for 'vorname'
 
     if (result.length > 0) {
         return json({ success: true, message: "User found", user: result[0] });

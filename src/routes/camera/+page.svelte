@@ -74,13 +74,32 @@
         }
     }
 </script>
- 
-<div id="reader"></div>
 
-<button on:click={start} disabled={scanning}>Start Scanning</button>
-<button on:click={stop} disabled={!scanning}>Stop Scanning</button>
-
-<p>Scan Result: {result}</p>
-
-<p>{userMessage}</p>
-
+<div class="flex flex-col items-center gap-4 p-6 bg-gray-100 rounded-lg shadow-lg">
+    <div id="reader" class="w-64 h-64 border-2 border-gray-300 rounded-lg flex items-center justify-center">
+      <p class="text-gray-500">QR Code Scanner</p>
+    </div>
+  
+    <div class="flex gap-4">
+      <button 
+        on:click={start} 
+        disabled={scanning} 
+        class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md disabled:bg-gray-400"
+      >
+        Start Scanning
+      </button>
+      
+      <button 
+        on:click={stop} 
+        disabled={!scanning} 
+        class="px-4 py-2 bg-red-500 text-white rounded-lg shadow-md disabled:bg-gray-400"
+      >
+        Stop Scanning
+      </button>
+    </div>
+  
+    <p class="text-lg font-semibold text-gray-700">Scan Result: <span class="text-blue-600">{result}</span></p>
+  
+    <p class="text-sm text-gray-600">{userMessage}</p>
+  </div>
+  

@@ -9,10 +9,9 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendTestEmail = async (email: string, userId: number) => {
-  const baseUrl = "https://botschaft.vercel.app/api/update-choise";
-  const yesLink = `${baseUrl}?userId=${userId}&choice=yes`;
-  const noLink = `${baseUrl}?userId=${userId}&choice=no`;
-
+  const baseUrl = "https://botschaft.vercel.app/admin/update-choise";
+  const yesLink = `${baseUrl}?besucher_id=${userId}&choice=yes`;
+  const noLink = `${baseUrl}?besucher_id=${userId}&choice=no`;
 
 	const mailOptions = {
 		from: `"Ambasada Austriake" <${process.env.GMAIL_USER}>`,

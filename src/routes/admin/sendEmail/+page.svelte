@@ -1,5 +1,6 @@
 <script lang="ts">
 	let email: string = '';
+	let userId: string = '';
 	let successMessage: string = '';
 	let errorMessage: string = '';
 	let isLoading: boolean = false;
@@ -15,7 +16,7 @@
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify({ email })
+				body: JSON.stringify({ email, userId }) 
 			});
 
 			const data = await response.json();
@@ -42,8 +43,18 @@
 			<div class="mb-4">
 				<input
 					type="email"
-					placeholder="Enter your email"
+					placeholder="Enter user's email"
 					bind:value={email}
+					required
+					class="w-full rounded-lg border border-gray-300 p-4 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+				/>
+			</div>
+
+			<div class="mb-4">
+				<input
+					type="text"
+					placeholder="Enter userId"
+					bind:value={userId}
 					required
 					class="w-full rounded-lg border border-gray-300 p-4 focus:ring-2 focus:ring-blue-500 focus:outline-none"
 				/>

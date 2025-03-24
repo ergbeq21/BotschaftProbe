@@ -1,47 +1,38 @@
 import { json } from '@sveltejs/kit';
-import { db } from '$lib/server/db'; // Adjust if necessary
-import { user } from '$lib/server/db/schema'; // Import the correct table
-import { visits } from '$lib/server/db/schema'; // Make sure to import the visits table
+import { db } from '$lib/server/db';
+import { visits } from '$lib/server/db/schema'; 
 import { eq } from 'drizzle-orm';
 
 export async function GET({ url }) {
-	const userId = url.searchParams.get('userId');
-	const choice = url.searchParams.get('choice');
+  console.log('Received request at /admin/update-choise');
 
-	console.log('Received parameters:', { userId, choice }); // Debugging log
 
-	if (!userId || !choice) {
-		console.error('❌ Missing parameters');
-		return json({ error: 'Missing parameters' }, { status: 400 });
-	}
+  const besucherIdString = url.searchParams.get('besucher_id');
+  const choice = url.searchParams.get('choice');
 
-	const rsvpValue = choice === 'yes' ? 1 : 0;
+  console.log('Received parameters:', { besucherIdString, choice });
 
-	try {
+  if (!besucherIdString || !choice) {
+    return json({ error: 'Invalid or missing parameters' }, { status: 400 });
+  }
 
-		const userRecord = await db
-			.select({ besucher_id: user.besucher_id })
-			.from(user)
-			.where(eq(user.besucher_id, Number(userId)))
-			.limit(1);
+  const besucherId = Number(besucherIdString);
+  if (isNaN(besucherId)) {
+    return json({ error: 'Invalid userId' }, { status: 400 });
+  }
 
-		if (!userRecord.length) {
-			console.error('❌ User not found');
-			return json({ error: 'User not found' }, { status: 404 });
-		}
+  const rsvpValue = choice === 'yes' ? 1 : 0; 
 
-		const besucherId = userRecord[0].besucher_id as number; // Type assertion to number
+  try {
+    const result = await db.update(visits)
+      .set({ rsvp: rsvpValue })
+      .where(eq(visits.besucher_id, besucherId))
+      .execute();
 
-		const result = await db
-			.update(visits)
-			.set({ rsvp: rsvpValue })
-			.where(eq(visits.besucher_id, besucherId)) // Use the correctly typed `besucher_id`
-			.execute();
-
-		console.log('✅ Database update result:', result);
-		return json({ success: true, message: `RSVP updated to ${rsvpValue}` });
-	} catch (error) {
-		console.error('🔥 Database update error:', error);
-		return json({ error: 'Database update failed' }, { status: 500 });
-	}
+    console.log('RSVP updated successfully:', result);
+    return json({ success: true, message: `RSVP updated to ${rsvpValue}` });
+  } catch (error) {
+    console.error('Database update error:', error);
+    return json({ error: 'Database update failed' }, { status: 500 });
+  }
 }

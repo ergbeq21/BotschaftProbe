@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
 const sendTestEmail = async (email: string, userId: number) => {
   const baseUrl = "https://botschaft.vercel.app/admin/update-choise";
   const yesLink = `${baseUrl}?besucher_id=${userId}&choice=yes`;
-  const noLink = `${baseUrl}?besucher_id${userId}&choice=no`;
+  const noLink = `${baseUrl}?besucher_id=${userId}&choice=no`;
 
 
 	const mailOptions = {

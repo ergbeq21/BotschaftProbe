@@ -69,22 +69,22 @@
                 </a>
             </li>
             <li class:flex={!$sidebarExpanded} class:justify-center={!$sidebarExpanded}>
-                <a href="/users" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition" class:active={$activeLink === 'users'}>
+                <a href="/admin/users" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition" class:active={$activeLink === 'users'}>
                     👥 {#if $isTextVisible}Users{/if}
                 </a>
             </li>
             <li class:flex={!$sidebarExpanded} class:justify-center={!$sidebarExpanded}>
-                <a href="/events" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition" class:active={$activeLink === 'events'}>
+                <a href="/admin/events" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition" class:active={$activeLink === 'events'}>
                     📅 {#if $isTextVisible}Events{/if}
                 </a>
             </li>
             <li class:flex={!$sidebarExpanded} class:justify-center={!$sidebarExpanded}>
-                <a href="/sendToAll" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition" class:active={$activeLink === 'sendToAll'}>
+                <a href="/admin/sendToAll" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition" class:active={$activeLink === 'sendToAll'}>
                     📧 {#if $isTextVisible}Email to All{/if}
                 </a>
             </li>
             <li class:flex={!$sidebarExpanded} class:justify-center={!$sidebarExpanded}>
-                <a href="/sendEmail" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition" class:active={$activeLink === 'sendEmail'}>
+                <a href="/admin/sendEmail" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition" class:active={$activeLink === 'sendEmail'}>
                     ✉️ {#if $isTextVisible}Specific Email{/if}
                 </a>
             </li>

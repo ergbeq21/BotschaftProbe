@@ -1,18 +1,15 @@
 import { GetAllEvents } from '$lib/server/getAllEvents';
 import { deleteEvent } from '$lib/server/db/deleteEvent.js';
-import { redirect } from '@sveltejs/kit';
+import { redirect, error } from '@sveltejs/kit';
 
 export async function load({ locals }) {
 	if (!locals.user || locals.user.role !== 'admin') {
-		redirect(302, '/login');
+		throw error(403, 'Access Denied, only admins have access to this site');
 	}
-	const events = await GetAllEvents();
-	const serializedEvents = JSON.parse(JSON.stringify(events));
+	return {};
 
-	return {
-		events: serializedEvents
-	};
 }
+
 
 export const actions = {
 	deleteEvent: async ({ request }) => {

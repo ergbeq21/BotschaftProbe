@@ -70,7 +70,7 @@
 			<p class="mt-4 font-medium text-red-600">{errorMessage}</p>
 		{/if}
 
-		<a href="/users" class="mt-6 block text-center text-blue-600 hover:underline"
+		<a href="/admin/users" class="mt-6 block text-center text-blue-600 hover:underline"
 			>Go back to Users</a
 		>
 	</div>

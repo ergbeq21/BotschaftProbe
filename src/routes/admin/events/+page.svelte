@@ -5,12 +5,12 @@
 <main class="flex min-h-screen flex-col items-center bg-gray-100 py-12">
 	<h1 class="mb-8 text-center text-4xl font-extrabold text-blue-900">Alle Events</h1>
 
-	<a href="/users" class="mb-4 text-lg text-blue-600 transition duration-300 hover:text-blue-800">
+	<a href="/admin/users" class="mb-4 text-lg text-blue-600 transition duration-300 hover:text-blue-800">
 		Go Back to Users
 	</a>
 
 	<a
-		href="/events/newEvent"
+		href="/admin/events/newEvent"
 		class="mb-8 rounded-full bg-blue-600 px-6 py-3 text-lg text-white shadow-xl transition duration-300 hover:bg-blue-700"
 	>
 		Add a new event

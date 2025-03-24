@@ -6,9 +6,9 @@
 
 	const goToAdminPage = () => {
 		if (!data.user) {
-			goto('/login');
+			goto('/admin/login');
 		} else {
-			goto('/users');
+			goto('/admin/users');
 		}
 	};
 </script>
@@ -24,7 +24,7 @@
 			<h1 class="mb-4 text-3xl font-semibold text-gray-800">You are not logged in.</h1>
 			<p class="mb-4 text-lg text-gray-600">To access the admin page, please log in.</p>
 			<a
-				href="/login"
+				href="/admin/login"
 				class="font-semibold text-blue-600 transition duration-300 hover:text-blue-700">Login</a
 			>
 		{/if}

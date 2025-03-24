@@ -7,7 +7,7 @@
 	  message = '';
   
 	  try {
-		const response = await fetch('/sendToAll', {
+		const response = await fetch('/admin/sendToAll', {
 		  method: 'POST'
 		});
 		const data = await response.json();

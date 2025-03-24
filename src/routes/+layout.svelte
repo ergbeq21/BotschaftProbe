@@ -43,10 +43,9 @@
 </script>
 
 
-
 <aside
     id="default-sidebar"
-    class="fixed top-0 left-0 z-40 h-screen bg-gray-900 text-white shadow-xl transform transition-transform duration-300 flex flex-col"
+    class="fixed top-0 left-0 z-40 h-screen bg-gray-900 text-white shadow-xl transform transition-transform duration-300 flex flex-col overflow-y-auto"
     class:translate-x-0={$isMenuOpen}
     class:w-72={$sidebarExpanded}
     class:w-16={!$sidebarExpanded}
@@ -106,10 +105,9 @@
         <span class="text-xs font-semibold">&lt;&gt;</span> <!-- Properly centered "<>" -->
     {/if}
 </button>
-
-
     </div>
 </aside>
+
 
 <div class="p-4 transition-all duration-300" class:ml-72={$sidebarExpanded} class:ml-16={!$sidebarExpanded}>
     <main class="p-6 bg-white shadow-md rounded-lg">

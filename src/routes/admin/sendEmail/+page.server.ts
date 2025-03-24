@@ -1,6 +1,17 @@
 import { json } from '@sveltejs/kit';
 import { sendTestEmail } from '$lib/server/mailer';
 
+
+
+
+import { redirect, error } from '@sveltejs/kit';
+
+export async function load({ locals }) {
+	if (!locals.user || locals.user.role !== 'admin') {
+		throw error(403, 'Access Denied, only admins have access to this site');
+	}
+}
+
 export const actions = {
   sendEmail: async ({ request }) => {
     const formData = await request.formData();

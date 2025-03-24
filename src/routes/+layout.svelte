@@ -91,6 +91,11 @@
                     ✉️ {#if $isTextVisible}Specific Email{/if}
                 </a>
             </li>
+            <li class:flex={!$sidebarExpanded} class:justify-center={!$sidebarExpanded}>
+                <a href="/generateQR" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition" class:active={$activeLink === 'sendEmail'}>
+                    🏷️ {#if $isTextVisible}Generate QR-Code{/if}
+                </a>
+            </li>
         </ul>
         <button
             class="mt-auto p-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition flex justify-center items-center"

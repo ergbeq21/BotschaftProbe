@@ -1,11 +1,20 @@
+import { sendTestEmail } from '$lib/server/mailer';
 
-import { error } from '@sveltejs/kit';
+export const actions = {
+  sendEmail: async ({ request }) => {
+    const formData = await request.formData();
+    const email = formData.get('email') as string;
+    const userId = formData.get('userId') as string;
 
-
-
-export async function load({ locals }) {
-    if (!locals.user || locals.user.role !== 'admin') {
-        throw error(403, 'Access Denied, only admins have access to this site');
+    if (!email || !userId) {
+      return { error: 'Missing email or userId' };
     }
-    return {};
-}
+
+    try {
+      await sendTestEmail(email, parseInt(userId));
+      return { success: true };
+    } catch (error) {
+      return { error: 'Failed to send email' };
+    }
+  }
+};

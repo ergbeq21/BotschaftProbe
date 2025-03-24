@@ -1,30 +1,38 @@
 import nodemailer from 'nodemailer';
 
 const transporter = nodemailer.createTransport({
-	service: 'gmail',
-	auth: {
-		user: process.env.GMAIL_USER,
-		pass: process.env.GMAIL_APP_PASSWORD
-	}
+  service: 'gmail',
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_APP_PASSWORD
+  }
 });
 
-const sendTestEmail = async (email: string) => {
+const sendTestEmail = async (email: string, userId: number) => {
+  const baseUrl = "https://botschaft.vercel.app/api/update-choice";
+  const yesLink = `${baseUrl}?userId=${userId}&choice=yes`;
+  const noLink = `${baseUrl}?userId=${userId}&choice=no`;
+
   const mailOptions = {
-    from: 'Ambasada Austriake ergitbeqiri07@gmail.com',
+    from: `"Ambasada Austriake" <${process.env.GMAIL_USER}>`,
     to: email,
-    subject: 'Ftese per ne diten e pavarsise',
-    text: `Hello, do you want to join our party!`,
-    html: `<p>Go to our website: https://botschaft.vercel.app/</p>`,
+    subject: 'Ftesë për Ditën e Pavarësisë',
+    html: `
+      <p>Do you want to join our party?</p>
+      <a href="${yesLink}" style="padding: 10px; background: green; color: white; text-decoration: none; border-radius: 5px;">Yes ✅</a>
+      <a href="${noLink}" style="padding: 10px; background: red; color: white; text-decoration: none; border-radius: 5px; margin-left: 10px;">No ❌</a>
+      <p>Or visit our website: <a href="https://botschaft.vercel.app/">Click here</a></p>
+    `,
   };
 
-	try {
-		const info = await transporter.sendMail(mailOptions);
-		console.log('Email sent:', info.messageId);
-		return info;
-	} catch (error) {
-		console.error('Error while sending email:', error);
-		throw error;
-	}
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Email sent:', info.messageId);
+    return info;
+  } catch (error) {
+    console.error('Error while sending email:', error);
+    throw error;
+  }
 };
 
 export { sendTestEmail };

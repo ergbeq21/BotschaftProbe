@@ -10,7 +10,7 @@
 		errorMessage = '';
 
 		try {
-			const response = await fetch('/sendEmail', {
+			const response = await fetch('/admin/sendEmail', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

@@ -19,9 +19,9 @@ const sendSpecificEmail = async () => {
 	for (const userData of users) {
 		const { email, besucher_id } = userData;
 
-		// Generate a unique URL containing the user ID
+
 		const qrData = `https://botschaft.vercel.app/verify?id=${besucher_id}`;
-		const qrCodeImage = await QRCode.toDataURL(qrData); // Generate QR code as base64 image
+		const qrCodeImage = await QRCode.toDataURL(qrData); 
 
 		// Email content
 		const mailOptions = {

@@ -1,32 +1,31 @@
 import { json } from '@sveltejs/kit';
-import { db } from '$lib/server/db'; // Adjust this if necessary
-import { visits } from '$lib/server/db/schema'; // Import the visits table
+import { db } from '$lib/server/db';
+import { visits } from '$lib/server/db/schema';
 import { eq } from 'drizzle-orm';
 
 export async function GET({ url }) {
-    console.log('Received request at /admin/update-choice');
-    
-    const besucherId = url.searchParams.get('besucher_id');
-    const choice = url.searchParams.get('choice');
-    
-    console.log('Received parameters:', { besucherId, choice });
+    console.log('✅ Route hit:', url.toString());
 
-    if (!besucherId || !choice) {
+    const userId = url.searchParams.get('userId');
+    const choice = url.searchParams.get('choice');
+
+    if (!userId || !choice) {
+        console.error('❌ Missing parameters');
         return json({ error: 'Missing parameters' }, { status: 400 });
     }
 
-    const rsvpValue = choice === 'yes' ? 1 : 0;
+	const rsvpValue = choice === 'yes' ? 1 : 0;
 
     try {
         const result = await db.update(visits)
             .set({ rsvp: rsvpValue })
-            .where(eq(visits.besucher_id, Number(besucherId)))
+            .where(eq(visits.besucher_id, Number(userId)))
             .execute();
 
-        console.log('RSVP updated successfully:', result);
+        console.log('✅ Database update result:', result);
         return json({ success: true, message: `RSVP updated to ${rsvpValue}` });
     } catch (error) {
-        console.error('Database update error:', error);
+        console.error('🔥 Database update error:', error);
         return json({ error: 'Database update failed' }, { status: 500 });
     }
 }

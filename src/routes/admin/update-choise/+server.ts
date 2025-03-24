@@ -19,15 +19,19 @@ export async function GET({ url }) {
     const rsvpValue = choice === 'yes' ? 1 : 0;
 
     try {
-        const result = await db.update(visits)
+        const query = db.update(visits)
             .set({ rsvp: rsvpValue })
-            .where(eq(visits.besucher_id, Number(besucherId)))
-            .execute();
-
+            .where(eq(visits.besucher_id, Number(besucherId)));
+    
+        console.log('Generated SQL query:', query.toString());  // Log the query
+    
+        const result = await query.execute();
+    
         console.log('RSVP updated successfully:', result);
         return json({ success: true, message: `RSVP updated to ${rsvpValue}` });
     } catch (error) {
         console.error('Database update error:', error);
         return json({ error: 'Database update failed' }, { status: 500 });
     }
+    
 }

@@ -3,7 +3,7 @@
 	import { goto } from '$app/navigation';
 
 	let { data }: PageProps = $props();
-	let loading : boolean= $state(true);
+	let loading: boolean = $state(true);
 
 	// When data is ready, mark loading as false
 	$effect(() => {
@@ -40,8 +40,7 @@
 				<p class="mb-4 text-lg text-gray-600">To access the admin page, please log in.</p>
 				<a
 					href="/admin/login"
-					class="font-semibold text-blue-600 transition duration-300 hover:text-blue-700"
-					>Login</a
+					class="font-semibold text-blue-600 transition duration-300 hover:text-blue-700">Login</a
 				>
 			{/if}
 

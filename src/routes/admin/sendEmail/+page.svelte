@@ -1,5 +1,6 @@
 <script lang="ts">
 	let email: string = '';
+	let userId: string = ''; // New userId input
 	let successMessage: string = '';
 	let errorMessage: string = '';
 	let isLoading: boolean = false;
@@ -10,12 +11,13 @@
 		errorMessage = '';
 
 		try {
+			// Send both email and userId as JSON payload
 			const response = await fetch('/admin/sendEmail', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify({ email })
+				body: JSON.stringify({ email, userId }) // Sending both email and userId
 			});
 
 			const data = await response.json();
@@ -42,8 +44,18 @@
 			<div class="mb-4">
 				<input
 					type="email"
-					placeholder="Enter your email"
+					placeholder="Enter user's email"
 					bind:value={email}
+					required
+					class="w-full rounded-lg border border-gray-300 p-4 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+				/>
+			</div>
+
+			<div class="mb-4">
+				<input
+					type="text"
+					placeholder="Enter userId"
+					bind:value={userId}
 					required
 					class="w-full rounded-lg border border-gray-300 p-4 focus:ring-2 focus:ring-blue-500 focus:outline-none"
 				/>

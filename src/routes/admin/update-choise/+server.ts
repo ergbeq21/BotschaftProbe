@@ -1,12 +1,12 @@
 import { json } from '@sveltejs/kit';
-import { db } from '$lib/server/db'; // Import your db setup
-import { visits } from '$lib/server/db/schema'; // Import your schema
+import { db } from '$lib/server/db';
+import { visits } from '$lib/server/db/schema'; 
 import { eq } from 'drizzle-orm';
 
 export async function GET({ url }) {
   console.log('Received request at /admin/update-choise');
 
-  // Extract parameters from URL
+
   const besucherIdString = url.searchParams.get('besucher_id');
   const choice = url.searchParams.get('choice');
 

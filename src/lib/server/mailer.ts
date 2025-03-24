@@ -13,6 +13,7 @@ const sendTestEmail = async (email: string, userId: number) => {
   const yesLink = `${baseUrl}?userId=${userId}&choice=yes`;
   const noLink = `${baseUrl}?userId=${userId}&choice=no`;
 
+
 	const mailOptions = {
 		from: `"Ambasada Austriake" <${process.env.GMAIL_USER}>`,
 		to: email,

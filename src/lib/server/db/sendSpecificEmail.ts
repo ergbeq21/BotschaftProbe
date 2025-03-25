@@ -23,7 +23,6 @@ const sendSpecificEmail = async () => {
 		const qrData = `https://botschaft.vercel.app/verify?id=${besucher_id}`;
 		const qrCodeImage = await QRCode.toDataURL(qrData);
 
-		// If the inline image doesn't show, consider serving the image via URL instead
 		const mailOptions = {
 			from: 'Ambasada Austriake <ergitbeqiri07@gmail.com>',
 			to: email,
@@ -31,7 +30,7 @@ const sendSpecificEmail = async () => {
 			html: `
 				<p>Hello,</p>
 				<p>Here is your unique QR code for the event:</p>
-				<img src="${qrCodeImage}" alt="Your QR Code" width="200" />  <!-- Adjust size if needed -->
+				<img src="${qrCodeImage}" alt="Your QR Code" />
 				<p>Scan this at the entrance.</p>
 				<p><a href="${qrData}">Or click here to verify</a></p>
 			`

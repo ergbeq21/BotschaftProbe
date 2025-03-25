@@ -13,7 +13,6 @@ export const insertAllUsers = async () => {
 			password: 'hashed-password'
 		};
 
-		// Insert the user into the allUsers table
 		await db.insert(allUsers).values(newUser);
 
 		console.log('User inserted successfully');

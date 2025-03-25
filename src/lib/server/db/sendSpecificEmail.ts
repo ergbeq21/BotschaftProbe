@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import QRCode from 'qrcode'; // Import QR code generator
+import QRCode from 'qrcode'; 
 import { db } from '.';
 import { user } from './schema';
 
@@ -12,20 +12,18 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendSpecificEmail = async () => {
-	// Fetch user data
 	const users = await db
 		.select({ email: user.email, besucher_id: user.besucher_id })
 		.from(user)
 		.execute();
 
-	// Loop through each user and send an email with a unique QR code
 	for (const userData of users) {
 		const { email, besucher_id } = userData;
 
 		const qrData = `https://botschaft.vercel.app/verify?id=${besucher_id}`;
 		const qrCodeImage = await QRCode.toDataURL(qrData);
 
-		// Email content
+		// If the inline image doesn't show, consider serving the image via URL instead
 		const mailOptions = {
 			from: 'Ambasada Austriake <ergitbeqiri07@gmail.com>',
 			to: email,
@@ -33,7 +31,7 @@ const sendSpecificEmail = async () => {
 			html: `
 				<p>Hello,</p>
 				<p>Here is your unique QR code for the event:</p>
-				<img src="${qrCodeImage}" alt="Your QR Code" />
+				<img src="${qrCodeImage}" alt="Your QR Code" width="200" />  <!-- Adjust size if needed -->
 				<p>Scan this at the entrance.</p>
 				<p><a href="${qrData}">Or click here to verify</a></p>
 			`

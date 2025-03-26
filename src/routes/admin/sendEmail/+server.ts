@@ -1,20 +1,17 @@
 import { json } from '@sveltejs/kit';
 import { sendTestEmail } from '$lib/server/mailer';
-import { GetAllUsers } from '$lib/server/db/getUsers.js';
-
-
-
 
 export async function POST({ request }) {
-	const { email } = await request.json();
+	const { email, userId } = await request.json();
 
-	if (!email) {
-		return json({ error: 'Keine E-Mail-Adresse angegeben' }, { status: 400 });
+	if (!email || !userId) {
+		return json({ error: 'Missing email or userId' }, { status: 400 });
 	}
 
 	try {
-		const result = await sendTestEmail(email);
-		return json({ success: 'E-Mail wurde gesendet!', messageId: result?.messageId });
+		// Call your email sending function with both email and userId
+		await sendTestEmail(email, parseInt(userId));
+		return json({ success: 'E-Mail wurde gesendet!' });
 	} catch (error) {
 		return json(
 			{

@@ -33,9 +33,12 @@
 				</h1>
 				<p class="mb-6 text-base sm:text-lg text-gray-600">You are logged in as {data.user.role}.</p>
 			{:else}
-				<h1 class="mb-4 text-2xl sm:text-3xl font-semibold text-gray-800">You are not logged in.</h1>
-				<p class="mb-4 text-base sm:text-lg text-gray-600">To access the admin page, please log in.</p>
-				<a href="/admin/login" class="font-semibold text-blue-600 transition duration-300 hover:text-blue-700">Login</a>
+				<h1 class="mb-4 text-3xl font-semibold text-gray-800">You are not logged in.</h1>
+				<p class="mb-4 text-lg text-gray-600">To access the admin page, please log in.</p>
+				<a
+					href="/admin/login"
+					class="font-semibold text-blue-600 transition duration-300 hover:text-blue-700">Login</a
+				>
 			{/if}
 
 			<div class="mt-8">

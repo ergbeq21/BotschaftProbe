@@ -3,15 +3,12 @@ import { redirect } from '@sveltejs/kit';
 
 import { error } from '@sveltejs/kit';
 
-
-
 export async function load({ locals }) {
-    if (!locals.user || locals.user.role !== 'admin') {
-        throw error(403, 'Access Denied, only admins have access to this site');
-    }
+	if (!locals.user || locals.user.role !== 'admin') {
+		throw error(403, 'Access Denied, only admins have access to this site');
+	}
 	return {};
 }
-
 
 export const actions = {
 	putUser: async ({ request }) => {
@@ -26,7 +23,7 @@ export const actions = {
 		}
 
 		await insertUser(userName, userNachname, userEmail);
-		redirect(303, '/users');
+		redirect(303, '/admin/users');
 
 		return { success: true, message: 'User inserted successfully.' };
 	}

@@ -12,9 +12,7 @@ export async function load({ locals }) {
 	return {
 		events: serializedEvents
 	};
-
 }
-
 
 export const actions = {
 	deleteEvent: async ({ request }) => {

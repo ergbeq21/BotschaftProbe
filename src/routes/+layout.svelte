@@ -1,46 +1,44 @@
 <script lang="ts">
+	import { writable, derived } from 'svelte/store';
+	import { onMount } from 'svelte';
+	import '../app.css';
+	let { children } = $props();
 
-    import { writable, derived  } from 'svelte/store';
-    import { onMount } from 'svelte';
-    import '../app.css';
-    let { children } = $props();
+	// Create a store for menuOpen
+	let menuOpen = writable(false);
+	let textVisible = writable(true);
+	let isSidebarExpanded = writable(true);
+	let activeLink = writable('');
 
-    // Create a store for menuOpen
-    let menuOpen = writable(false);``
-    let textVisible = writable(true);
-    let isSidebarExpanded = writable(true);
-    let activeLink = writable('');
+	// Derived store to update a local variable
+	let isMenuOpen = derived(menuOpen, ($menuOpen) => $menuOpen);
+	let isTextVisible = derived(textVisible, ($textVisible) => $textVisible);
+	let sidebarExpanded = derived(isSidebarExpanded, ($isSidebarExpanded) => $isSidebarExpanded);
 
-    // Derived store to update a local variable
-    let isMenuOpen = derived(menuOpen, $menuOpen => $menuOpen);
-    let isTextVisible = derived(textVisible, $textVisible => $textVisible);
-    let sidebarExpanded = derived(isSidebarExpanded, $isSidebarExpanded => $isSidebarExpanded);
+	const toggleMenu = () => {
+		// Update the store value instead of directly toggling a boolean
+		menuOpen.update((value) => !value);
+	};
 
-    const toggleMenu = () => {
-        // Update the store value instead of directly toggling a boolean
-        menuOpen.update(value => !value);
-    };
+	const toggleTextVisibility = () => {
+		textVisible.update((value) => !value);
+		isSidebarExpanded.update((value) => !value);
+	};
 
-    const toggleTextVisibility = () => {
-        textVisible.update(value => !value);
-        isSidebarExpanded.update(value => !value);
-    };
+	const setActiveLink = (link: string) => {
+		activeLink.set(link);
+	};
 
-    const setActiveLink = (link: string) => {
-        activeLink.set(link);
-    };
-
-
-    const updateActiveLink = () => {
-
-        const path = window.location.pathname;
-        if (path === '/') setActiveLink('home');
-        else if (path === '/users') setActiveLink('users');
-        else if (path === '/events') setActiveLink('events');
-        else if (path === '/sendToAll') setActiveLink('sendToAll');
-        else if (path === '/sendEmail') setActiveLink('sendEmail');
-    }
+	const updateActiveLink = () => {
+		const path = window.location.pathname;
+		if (path === '/') setActiveLink('home');
+		else if (path === '/users') setActiveLink('users');
+		else if (path === '/events') setActiveLink('events');
+		else if (path === '/sendToAll') setActiveLink('sendToAll');
+		else if (path === '/sendEmail') setActiveLink('sendEmail');
+	};
 </script>
+
 
 
 <aside
@@ -94,17 +92,18 @@
             </li>
         </ul>
         <button
-    class="mt-auto p-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition flex justify-center items-center 
-    { $isTextVisible ? 'px-4 py-3' : 'w-8 h-8' }"
-    aria-label="Toggle sidebar"
-    onclick={toggleTextVisibility}
->
-    {#if $isTextVisible}
-        Close Menu
-    {:else}
-        <span class="text-xs font-semibold">&lt;&gt;</span> <!-- Properly centered "<>" -->
-    {/if}
-</button>
+            class="mt-auto p-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition flex justify-center items-center"
+            aria-label="Toggle sidebar"
+            onclick={toggleTextVisibility}
+        >
+            {#if $isTextVisible}
+                Close Menu
+            {:else}
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 15l-5.878-6.008 1.184-1.192L10 12.694l4.694-4.996 1.184 1.192L10 15z"></path>
+                </svg>
+            {/if}
+        </button>
     </div>
 </aside>
 
@@ -116,9 +115,8 @@
 </div>
 
 <style>
-    /* Add this style to highlight the active link */
-    a.active {
-        background-color: #4a5568; /* Adjust the color as needed */
-    }
+	/* Add this style to highlight the active link */
+	a.active {
+		background-color: #4a5568; /* Adjust the color as needed */
+	}
 </style>
-

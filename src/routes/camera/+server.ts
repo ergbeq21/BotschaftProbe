@@ -6,7 +6,6 @@ import type { RequestEvent } from "@sveltejs/kit";
 
 export async function POST({ request }: RequestEvent) {
     const { name } = await request.json();
-
     if (!name) {
         return json({ success: false, message: "No name provided" }, { status: 400 });
     }

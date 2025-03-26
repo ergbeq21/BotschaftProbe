@@ -23,7 +23,7 @@ export const actions: Actions = {
 				httpOnly: true,
 				sameSite: 'strict'
 			});
-			throw redirect(302, '/'); 
+			throw redirect(302, '/');
 		} else {
 			return {
 				success: false,

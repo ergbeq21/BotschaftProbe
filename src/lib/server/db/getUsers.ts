@@ -8,7 +8,7 @@ interface User {
 	email: string;
 }
 
-export async function GetAllUsers(): Promise<User[]> {
+export async function GetAllUsers(email: any): Promise<User[]> {
 	const users = await db.select().from(user);
 
 	return users.map((user) => ({

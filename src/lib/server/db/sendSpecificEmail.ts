@@ -13,14 +13,14 @@ const transporter = nodemailer.createTransport({
 
 const sendSpecificEmail = async () => {
 	// Fetch user data
-	const users = await db.select({ email: user.email, besucher_id: user.besucher_id }).from(user).execute();
+	const users = await db.select({ email: user.email, name: user.vorname }).from(user).execute();
 
 	// Loop through each user and send an email with a unique QR code
 	for (const userData of users) {
-		const { email, besucher_id } = userData;
+		const { email, name } = userData;
 
 		// Generate a unique URL containing the user ID
-		const qrData = `https://botschaft.vercel.app/verify?id=${besucher_id}`;
+		const qrData = name;
 		const qrCodeImage = await QRCode.toDataURL(qrData); // Generate QR code as base64 image
 
 		// Email content
